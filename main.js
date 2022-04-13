@@ -5,10 +5,18 @@ const container = document.querySelector(".container");
 function generateGrid(number){
     const totalSquares = number * number;
     for (let i = 0; i < totalSquares; i++){
-        const div = document.createElement("div");
-        div.classList.add("square");
-        container.append(div);
+        const block = document.createElement("div");
+        block.classList.add("square");
+        container.append(block);
     };
-}
+};
 
-// container.append(div)
+generateGrid(16);
+
+const blocks = document.querySelectorAll(".square");
+
+blocks.forEach((block) => {
+    block.addEventListener('mouseenter', () => {
+        block.classList.add("squareHovered");
+    });
+});
