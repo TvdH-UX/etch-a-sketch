@@ -12,7 +12,10 @@ header.appendChild(resetButton);
 // const container = document.getElementsByClassName("container");
 
 function askValue(){
-    const value = parseInt(prompt("Enter a number to generate a grid"));
+    let value = parseInt(prompt("Enter a number from 1 to 100 to generate a grid"));
+    while (value < 1 || value > 100 || isNaN(value)) {
+        value = parseInt(prompt("Please, enter a number from 1 to 100 to generate a grid"));
+    }
     return value;
 }
 
