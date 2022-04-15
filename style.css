@@ -2,13 +2,26 @@
     margin: 0;
 }
 
+header {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+button {
+    padding: 8px 36px;
+    background-color: rgb(111, 81, 220);
+    color: #fff;
+    border-radius: 20px;
+}
+
 .container {
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
-    margin: 60px auto;
-    width: 960px;
-    height: 960px;
+    margin: 30px auto;
+    width: 600px;
+    height: 600px;
 }
 
 .square {
