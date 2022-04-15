@@ -1,12 +1,15 @@
 const body = document.body;
 const header = document.createElement("header");
-body.prepend(header);
+body.append(header);
+const container = document.createElement("div");
+container.classList.add("container");
+body.append(container);
 
 const resetButton = document.createElement("button");
 resetButton.textContent = "Reset";
 header.appendChild(resetButton);
 
-const container = document.querySelector(".container");
+// const container = document.getElementsByClassName("container");
 
 function askValue(){
     const value = parseInt(prompt("Enter a number to generate a grid"));
@@ -16,13 +19,15 @@ function askValue(){
 // Function to create a grid of 16x16
 function generateGrid(value){
     value = askValue();
+    container.style.gridTemplateColumns = "repeat("+value+", 1fr)";
+    container.style.gridTemplateRows = "repeat("+value+", 1fr)";
     const totalSquares = value * value;
-    console.log(totalSquares)
     for (let i = 0; i < totalSquares; i++){
         const block = document.createElement("div");
         block.classList.add("square");
         container.append(block);
     };
+    initializeSketching();
 };
 
 function initializeSketching(){
@@ -35,7 +40,6 @@ function initializeSketching(){
 };
 
 generateGrid();
-initializeSketching();
 
 // Event listener to change the color of a square when moused over
 
@@ -43,8 +47,6 @@ resetButton.addEventListener('click', () => {
     const blocks = document.querySelectorAll(".square");
     blocks.forEach((block) => {
         block.remove();
-        
     });
     generateGrid();
-    initializeSketching();
 });
