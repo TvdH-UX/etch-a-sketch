@@ -9,8 +9,6 @@ const resetButton = document.createElement("button");
 resetButton.textContent = "Reset";
 header.appendChild(resetButton);
 
-// const container = document.getElementsByClassName("container");
-
 function askValue(){
     let value = parseInt(prompt("Enter a number from 1 to 100 to generate a grid"));
     while (value < 1 || value > 100 || isNaN(value)) {
@@ -33,14 +31,32 @@ function generateGrid(value){
     initializeSketching();
 };
 
+function randomColor(){
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    const rgb = `rgb(${r},${g},${b})`;
+    return rgb;
+};
+
 function initializeSketching(){
     const blocks = document.querySelectorAll(".square");
     blocks.forEach((block) => {
         block.addEventListener('mouseenter', () => {
-            block.classList.add("squareHovered");
+            block.style.backgroundColor = randomColor();
+            // block.classList.add("squareHovered");
         });
     });
 };
+
+// function initializeSketching(){
+//     const blocks = document.querySelectorAll(".square");
+//     blocks.forEach((block) => {
+//         block.addEventListener('mouseenter', () => {
+//             block.classList.add("squareHovered");
+//         });
+//     });
+// };
 
 generateGrid();
 
