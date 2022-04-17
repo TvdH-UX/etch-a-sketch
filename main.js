@@ -9,6 +9,23 @@ const resetButton = document.createElement("button");
 resetButton.textContent = "Reset";
 header.appendChild(resetButton);
 
+const blackColorButton = document.createElement("button");
+blackColorButton.textContent = "Black";
+header.appendChild(blackColorButton);
+
+const colorsButton = document.createElement("button");
+colorsButton.textContent = "Colors";
+header.appendChild(colorsButton);
+
+const greyscaleButton = document.createElement("button");
+greyscaleButton.textContent = "Greyscale";
+header.appendChild(greyscaleButton);
+
+// initial button states
+let blackSelected = "on";
+let colorSelected = "off";
+let greyscaleSelected = "off";
+
 function askValue(){
     let value = parseInt(prompt("Enter a number from 1 to 100 to generate a grid"));
     while (value < 1 || value > 100 || isNaN(value)) {
@@ -31,6 +48,29 @@ function generateGrid(value){
     initializeSketching();
 };
 
+function initializeSketching(){
+    const blocks = document.querySelectorAll(".square");
+    blocks.forEach((block) => {
+        block.addEventListener('mouseenter', () => {
+            if (blackSelected === "on" && colorSelected === "off"){
+                block.style.backgroundColor = "#000";
+            } else if (colorSelected === "on" && blackSelected === "off"){
+                block.style.backgroundColor = randomColor();
+            }
+        });
+    });
+};
+
+generateGrid();
+
+resetButton.addEventListener('click', () => {
+    const blocks = document.querySelectorAll(".square");
+    blocks.forEach((block) => {
+        block.remove();
+    });
+    generateGrid();
+});
+
 function randomColor(){
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
@@ -39,33 +79,14 @@ function randomColor(){
     return rgb;
 };
 
-function initializeSketching(){
-    const blocks = document.querySelectorAll(".square");
-    blocks.forEach((block) => {
-        block.addEventListener('mouseenter', () => {
-            block.style.backgroundColor = randomColor();
-            // block.classList.add("squareHovered");
-        });
-    });
-};
+blackColorButton.addEventListener('click', () => {
+    blackSelected = "on";
+    colorSelected = "off";
+    greyscaleSelected = "off";
+});
 
-// function initializeSketching(){
-//     const blocks = document.querySelectorAll(".square");
-//     blocks.forEach((block) => {
-//         block.addEventListener('mouseenter', () => {
-//             block.classList.add("squareHovered");
-//         });
-//     });
-// };
-
-generateGrid();
-
-// Event listener to change the color of a square when moused over
-
-resetButton.addEventListener('click', () => {
-    const blocks = document.querySelectorAll(".square");
-    blocks.forEach((block) => {
-        block.remove();
-    });
-    generateGrid();
+colorsButton.addEventListener('click', () => {
+    blackSelected = "off";
+    colorSelected = "on";
+    greyscaleSelected = "off";
 });
