@@ -17,14 +17,9 @@ const colorsButton = document.createElement("button");
 colorsButton.textContent = "Colors";
 header.appendChild(colorsButton);
 
-const greyscaleButton = document.createElement("button");
-greyscaleButton.textContent = "Greyscale";
-header.appendChild(greyscaleButton);
-
 // initial button states
 let blackSelected = "on";
 let colorSelected = "off";
-let greyscaleSelected = "off";
 
 function askValue(){
     let value = parseInt(prompt("Enter a number from 1 to 100 to generate a grid"));
@@ -51,10 +46,14 @@ function generateGrid(value){
 function initializeSketching(){
     const blocks = document.querySelectorAll(".square");
     blocks.forEach((block) => {
+        
         block.addEventListener('mouseenter', () => {
-            if (blackSelected === "on" && colorSelected === "off"){
+            const cStyle = getComputedStyle(block);
+            const color = cStyle.getPropertyValue("background-color");
+            console.log(color)
+            if (blackSelected === "on"){
                 block.style.backgroundColor = "#000";
-            } else if (colorSelected === "on" && blackSelected === "off"){
+            } else if (colorSelected === "on"){
                 block.style.backgroundColor = randomColor();
             }
         });
@@ -82,11 +81,9 @@ function randomColor(){
 blackColorButton.addEventListener('click', () => {
     blackSelected = "on";
     colorSelected = "off";
-    greyscaleSelected = "off";
 });
 
 colorsButton.addEventListener('click', () => {
     blackSelected = "off";
     colorSelected = "on";
-    greyscaleSelected = "off";
 });
